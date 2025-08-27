@@ -2,6 +2,14 @@ import Link from "next/link";
 import React from "react";
 import { HiOutlinePencil } from "react-icons/hi";
 import { IoCheckmark, IoDocumentOutline } from "react-icons/io5";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { initialTickets } from "@/data";
 import { ticketPath } from "@/utils/paths";
 
@@ -21,23 +29,30 @@ const TicketsPage = () => {
         </p>
       </div>
 
+      <Separator />
+
       <div className="flex-1 flex flex-col items-center gap-y-4 animate-fade-in-from-top">
         {initialTickets.map((ticket) => (
-          <div
-            key={ticket.id}
-            className="w-full max-w-[420px] p-4 border border-slate-500 rounded"
-          >
-            <span className="text-md font-semibold">
-              {TICKET_ICONS[ticket.status]}
-            </span>
-            <h3 className="text-lg font-semibold truncate">{ticket.title}</h3>
-            <p className="text-sm text-slate-500 truncate mb-4">
-              {ticket.description}
-            </p>
-            <Link href={ticketPath(ticket.id)} className="text-sm underline">
-              View
-            </Link>
-          </div>
+          <Card key={ticket.id} className="w-full max-w-[420px]">
+            <CardHeader>
+              <CardTitle className="flex gap-x-2">
+                <span>{TICKET_ICONS[ticket.status]}</span>
+                <span className="truncate">{ticket.title}</span>
+              </CardTitle>
+            </CardHeader>
+
+            <CardContent>
+              <p className="line-clamp-3 whitespace-break-spaces">
+                {ticket.description}
+              </p>
+            </CardContent>
+
+            <CardFooter>
+              <Link href={ticketPath(ticket.id)} className="text-sm underline">
+                View
+              </Link>
+            </CardFooter>
+          </Card>
         ))}
       </div>
     </div>
