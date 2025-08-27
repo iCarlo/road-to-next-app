@@ -1,16 +1,22 @@
 import React from "react";
 import { initialTickets } from "@/data";
 
+const TICKET_ICONS = {
+  DONE: "X",
+  OPEN: "O",
+  IN_PROGRESS: ">",
+};
+
 interface TicketPageProps {
-  params: {
+  params: Promise<{
     ticketId: string;
-  };
+  }>;
 }
 
-const TicketPage = ({ params }: TicketPageProps) => {
-  const ticketDetail = initialTickets.find(
-    (ticket) => ticket.id === params.ticketId
-  );
+const TicketPage = async ({ params }: TicketPageProps) => {
+  const { ticketId } = await params;
+
+  const ticketDetail = initialTickets.find((ticket) => ticket.id === ticketId);
 
   if (!ticketDetail) {
     return <div>Ticket Not Found</div>;
@@ -20,9 +26,13 @@ const TicketPage = ({ params }: TicketPageProps) => {
     <div>
       <h2>TicketPage</h2>
 
-      <h4 className="font-bold text-xl">{ticketDetail.title}</h4>
+      <div className="flex gap-2 items-center">
+        <h4 className="font-bold text-xl">{ticketDetail.title}</h4>
+        <span className="text-md font-semibold">
+          {TICKET_ICONS[ticketDetail.status]}
+        </span>
+      </div>
       <p>{ticketDetail.description}</p>
-      <span className="text-md font-semibold">{ticketDetail.status}</span>
     </div>
   );
 };
