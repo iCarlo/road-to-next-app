@@ -3,13 +3,8 @@ import React from "react";
 import { Placeholder } from "@/components/placeholder";
 import { Button } from "@/components/ui/button";
 import { initialTickets } from "@/data";
+import { TicketItem } from "@/features/ticket/ticket-item";
 import { ticketsPath } from "@/utils/paths";
-
-const TICKET_ICONS = {
-  DONE: "X",
-  OPEN: "O",
-  IN_PROGRESS: ">",
-};
 
 interface TicketPageProps {
   params: Promise<{
@@ -36,16 +31,8 @@ const TicketPage = async ({ params }: TicketPageProps) => {
   }
 
   return (
-    <div>
-      <h2>TicketPage</h2>
-
-      <div className="flex gap-2 items-center">
-        <h4 className="font-bold text-xl">{ticketDetail.title}</h4>
-        <span className="text-md font-semibold">
-          {TICKET_ICONS[ticketDetail.status]}
-        </span>
-      </div>
-      <p>{ticketDetail.description}</p>
+    <div className="flex justify-center animate-fade-in-from-top">
+      <TicketItem ticket={ticketDetail} isDetail />
     </div>
   );
 };

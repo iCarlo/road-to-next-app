@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PiKanbanFill } from "react-icons/pi";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { homePath, ticketsPath } from "@/utils/paths";
+import { ThemeSwitcher } from "./theme/theme-switcher";
 
 export const Header = () => {
   return (
@@ -14,7 +15,8 @@ export const Header = () => {
           </Link>
         </Button>
       </div>
-      <div>
+      <div className="flex items-center gap-1">
+        <ThemeSwitcher />
         <Link
           className={buttonVariants({
             variant: "default",
