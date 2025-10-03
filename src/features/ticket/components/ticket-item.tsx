@@ -3,10 +3,10 @@ import React from "react";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Ticket } from "@/generated/prisma";
 import { cn } from "@/lib/utils";
 import { ticketPath } from "@/utils/paths";
 import { TICKET_ICONS } from "../constants";
-import { Ticket } from "../types";
 
 interface TicketItemProps {
   ticket: Ticket;

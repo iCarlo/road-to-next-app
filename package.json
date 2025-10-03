@@ -8,9 +8,12 @@
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "tsc:check": "tsc --noEmit"
+    "tsc:check": "tsc --noEmit",
+    "prisma:seed": "tsx prisma/seed.ts",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@prisma/client": "^6.16.3",
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
@@ -22,7 +25,8 @@
     "react-dom": "19.1.0",
     "react-error-boundary": "^6.0.0",
     "react-icons": "^5.5.0",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "tsx": "^4.20.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -33,6 +37,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.5.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
+    "prisma": "^6.16.3",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.7",
     "typescript": "^5"
