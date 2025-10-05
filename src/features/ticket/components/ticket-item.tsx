@@ -1,6 +1,6 @@
 // "use client";
 
-import { LucideTrash } from "lucide-react";
+import { LucidePencil, LucideTrash } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Ticket } from "@/generated/prisma";
 import { cn } from "@/lib/utils";
-import { ticketPath } from "@/utils/paths";
+import { ticketEditPath, ticketPath } from "@/utils/paths";
 import { deleteTicket } from "../actions/delete-ticket";
 import { TICKET_ICONS } from "../constants";
 
@@ -46,6 +46,14 @@ export const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
     </form>
   );
 
+  const editButton = (
+    <Button variant="outline" size="icon" asChild>
+      <Link prefetch href={ticketEditPath(ticket.id)}>
+        <LucidePencil className="size-4" />
+      </Link>
+    </Button>
+  );
+
   return (
     <div
       className={cn("w-full max-w-[420px] flex gap-x-1", {
@@ -72,7 +80,17 @@ export const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
       </Card>
 
       <div className="flex flex-col gap-y-1">
-        {isDetail ? deleteButton : detailButton}
+        {isDetail ? (
+          <>
+            {editButton}
+            {deleteButton}
+          </>
+        ) : (
+          <>
+            {detailButton}
+            {editButton}
+          </>
+        )}
       </div>
     </div>
   );
